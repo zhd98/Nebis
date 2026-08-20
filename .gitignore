@@ -1,0 +1,12 @@
+# Build output
+build/
+deps/
+deps_extract/
+*.zip
+
+# Local binaries (the released artifact is built by GitHub Actions)
+# Anchor to repo root with a leading slash so that the vendored runtime/
+# DLLs (Scintilla.dll, Lexilla.dll) ARE still tracked by git.
+mdpad.exe
+/Scintilla.dll
+/Lexilla.dll
