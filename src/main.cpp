@@ -9,6 +9,7 @@
 #include <vector>
 #include <cstring>
 #include "editor.h"
+#include "Scintilla.h" // SCNotification, SCN_SAVEPOINTLEFT/REACHED
 
 #define IDM_NEW    40001
 #define IDM_OPEN   40002
@@ -121,6 +122,8 @@ static void OnOpen() {
         MessageBoxW(g_hwndFrame, L"无法打开文件。", L"错误", MB_OK | MB_ICONERROR);
     }
 }
+static void OnSaveAs(); // forward decl: OnSave() calls it and it is defined below
+
 static void OnSave() {
     if (g_active < 0) return;
     if (g_docs[g_active].path.empty()) { OnSaveAs(); return; }
