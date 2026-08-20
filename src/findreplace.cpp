@@ -46,8 +46,10 @@ static std::string GetEditUtf8(HWND h) {
 
 static int GetFlags() {
     int f = 0;
-    if (Button_GetCheck(g_hCase) == BST_CHECKED) f |= SCFIND_MATCHCASE;
-    if (Button_GetCheck(g_hWord) == BST_CHECKED) f |= SCFIND_WHOLEWORD;
+    // Note: Button_GetCheck() macro exists in MSVC SDK but NOT in MinGW-w64
+    // headers, so send BM_GETCHECK directly.
+    if (SendMessageW(g_hCase, BM_GETCHECK, 0, 0) == BST_CHECKED) f |= SCFIND_MATCHCASE;
+    if (SendMessageW(g_hWord, BM_GETCHECK, 0, 0) == BST_CHECKED) f |= SCFIND_WHOLEWORD;
     return f;
 }
 

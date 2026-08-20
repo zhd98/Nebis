@@ -12,7 +12,9 @@ add_executable(mdpad WIN32
 )
 
 target_include_directories(mdpad PRIVATE src/scintilla)
-target_link_libraries(mdpad PRIVATE comctl32)
+# comctl32: tab control (InitCommonControlsEx/TabCtrl_*).
+# comdlg32: GetOpenFileNameW/GetSaveFileNameW (Open/Save As dialogs).
+target_link_libraries(mdpad PRIVATE comctl32 comdlg32)
 
 # Statically link the C/C++ runtime so the .exe has no external
 # MSVC/MinGW DLL dependency (only Windows system DLLs remain).
